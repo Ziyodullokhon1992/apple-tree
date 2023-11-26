@@ -2,20 +2,31 @@
 
 use common\models\Apple;
 use yii\grid\ActionColumn;
-use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Html;
 use yii\helpers\Url;
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\AppleSearch */
+/* @var $searchModel \common\models\search\AppleSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Apples';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<style>
+    .color {
+        width: 30px;
+        height: 30px;
+        box-shadow: 1px 2px 5px grey;
+        border-radius: 20%;
+        margin-top: 5px;
+    }
+</style>
 <div class="apple-index box box-primary">
-    <div class="box-header with-border">
-        <?= Html::a('Create Apple', ['create'], ['class' => 'btn btn-success btn-flat']) ?>
+    <div style="margin: 10px">
+        <button id="create-btn" class="btn btn-info" data-toggle="modal" data-target="#create-modal">
+            Create apples
+        </button>
     </div>
     <div class="box-body table-responsive no-padding">
         <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -31,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'value' => function (Apple $apple) {
                         return Html::tag('div', '', [
                             'class' => 'color',
-                            'style' => "background-color: #{$apple->color}"
+                            'style' => "background-color: {$apple->color}"
                         ]);
                     }
                 ],
