@@ -4,6 +4,7 @@ namespace common\components;
 
 use common\models\Apple;
 use yii\db\Exception;
+use yii\helpers\Json;
 
 class AppleFactory
 {
@@ -19,6 +20,7 @@ class AppleFactory
         for ($i = 0; $i < $numberOfApples; $i++) {
             $apple = $this->make();
             if (!$apple->save()) {
+                \Yii::warning(Json::encode($apple->errors));
                 throw new Exception("Error while creating apples");
             }
             $resultArray[] = $apple;
@@ -28,8 +30,7 @@ class AppleFactory
 
     public function make(): Apple
     {
-        $apple = new Apple();
-        $apple->color = $this->generateColor();
+        $apple = new Apple($this->generateColor());
         $apple->created_date = time();
         $apple->remained = 1.00;
         $apple->status = Apple::STATUS["ON_TREE"];
@@ -39,6 +40,6 @@ class AppleFactory
 
     private function generateColor(): string
     {
-        return sprintf('%06X', mt_rand(0xFF9999, 0xFFFF00));
+        return "#" . sprintf('%06X', mt_rand(0xFF9999, 0xFFFF00));
     }
 }

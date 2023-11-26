@@ -67,6 +67,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     'template' => '{fall} {bite-off} {eat}',
                     'buttons' => [
                         'fall' => function (string $url, Apple $apple) {
+                            if (!$apple->canFall()) {
+                                return "";
+                            }
                             $icon = "<span class='glyphicon glyphicon-download-alt'></span>";
                             return Html::a($icon, ["fall-form", "id" => $apple->id], ['data' => [
                                 'toggle' => 'modal',
@@ -75,6 +78,9 @@ $this->params['breadcrumbs'][] = $this->title;
                             ]]);
                         },
                         'bite-off' => function (string $url, Apple $apple) {
+                            if ($apple->canFall()) {
+                                return "";
+                            }
                             $icon = "<span class='glyphicon glyphicon-apple'></span>";
                             return Html::a($icon, ["bite-off-form", 'id' => $apple->id], ['data' => [
                                 'toggle' => 'modal',
@@ -83,6 +89,9 @@ $this->params['breadcrumbs'][] = $this->title;
                             ]]);
                         },
                         'eat' => function (string $url, Apple $apple) {
+                            if ($apple->canFall()) {
+                                return "";
+                            }
                             $icon = "<span class='glyphicon glyphicon-trash'></span>";
                             return Html::a($icon, ["eat-form", 'id' => $apple->id], ['data' => [
                                 'toggle' => 'modal',

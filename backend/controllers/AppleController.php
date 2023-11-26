@@ -94,7 +94,7 @@ class AppleController extends Controller
             (new AppleFactory())->makeSeveralApples();
             $transaction->commit();
             \Yii::$app->session->setFlash("success", "Apples successfully created");
-        } catch (\Exception $exception) {
+        } catch (\Exception|\Error $exception) {
             $transaction->rollBack();
             \Yii::$app->session->setFlash("error", $exception->getMessage());
         } finally {
@@ -175,7 +175,11 @@ class AppleController extends Controller
     {
         $apple = $this->findModel($id);
 
-        $apple->eat();
+        try {
+            $apple->eat();
+        } catch (\Exception $exception) {
+            \Yii::$app->session->setFlash("error", $exception->getMessage());
+        }
 
         return $this->redirect(['index']);
     }

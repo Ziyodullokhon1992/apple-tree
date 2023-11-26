@@ -14,7 +14,7 @@ class m231126_101633_create_apple_tree extends Migration
     {
         $this->createTable('{{%apple}}', [
             'id' => $this->primaryKey(),
-            'color' => $this->string(6)->notNull(),
+            'color' => $this->string(20)->notNull(),
             'created_date' => $this->integer(10)->notNull(),
             'fallen_date' => $this->integer(10),
             'status' => $this->string(10)->notNull()->defaultValue('on_tree'),

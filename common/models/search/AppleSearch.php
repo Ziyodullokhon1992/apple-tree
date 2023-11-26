@@ -9,8 +9,15 @@ use yii\data\ActiveDataProvider;
 /**
  * AppleSearch represents the model behind the search form of `common\models\Apple`.
  */
-class AppleSearch extends Apple
+class AppleSearch extends Model
 {
+    public $id;
+    public $color;
+    public $created_date;
+    public $fallen_date;
+    public $status;
+    public $remained;
+
     /**
      * @inheritdoc
      */
