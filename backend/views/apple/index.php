@@ -1,48 +1,37 @@
 <?php
 
-use common\models\Apple;
 use yii\helpers\Html;
-use yii\helpers\Url;
-use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
-/** @var yii\web\View $this */
-/** @var common\models\AppleSearch $searchModel */
-/** @var yii\data\ActiveDataProvider $dataProvider */
+/* @var $this yii\web\View */
+/* @var $searchModel common\models\AppleSearch */
+/* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Apples';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="apple-index">
+<div class="apple-index box box-primary">
+    <div class="box-header with-border">
+        <?= Html::a('Create Apple', ['create'], ['class' => 'btn btn-success btn-flat']) ?>
+    </div>
+    <div class="box-body table-responsive no-padding">
+        <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+        <?= GridView::widget([
+            'dataProvider' => $dataProvider,
+            'filterModel' => $searchModel,
+            'layout' => "{items}\n{summary}\n{pager}",
+            'columns' => [
+                ['class' => 'yii\grid\SerialColumn'],
 
-    <h1><?= Html::encode($this->title) ?></h1>
+                'id',
+                'color',
+                'created_date',
+                'fallen_date',
+                'status',
+                // 'remained',
 
-    <p>
-        <?= Html::a('Create Apple', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'color',
-            'created_date',
-            'fallen_date',
-            'status',
-            //'remained',
-            [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Apple $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                ['class' => 'yii\grid\ActionColumn'],
             ],
-        ],
-    ]); ?>
-
-
+        ]); ?>
+    </div>
 </div>

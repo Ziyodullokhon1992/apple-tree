@@ -3,29 +3,28 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-/** @var yii\web\View $this */
-/** @var common\models\Apple $model */
-/** @var yii\widgets\ActiveForm $form */
+/* @var $this yii\web\View */
+/* @var $model common\models\Apple */
+/* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="apple-form">
-
+<div class="apple-form box box-primary">
     <?php $form = ActiveForm::begin(); ?>
+    <div class="box-body table-responsive">
 
-    <?= $form->field($model, 'color')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'color')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'created_date')->textInput() ?>
+        <?= $form->field($model, 'created_date')->textInput() ?>
 
-    <?= $form->field($model, 'fallen_date')->textInput() ?>
+        <?= $form->field($model, 'fallen_date')->textInput() ?>
 
-    <?= $form->field($model, 'status')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'status')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'remained')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'remained')->textInput(['maxlength' => true]) ?>
 
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
-
+    <div class="box-footer">
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-flat']) ?>
+    </div>
     <?php ActiveForm::end(); ?>
-
 </div>
